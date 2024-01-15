@@ -1,0 +1,117 @@
+CSS cascading hyerarchy:
+
+Importance>type>specificy>position
+
+Position: two rules at same level, the latest rules
+ h1{color:red;color:blue;}h1{color:green}
+
+Specificy: Morespecific selectors rule over less specific.
+	Element (all) selectors are last
+	.Class selectors then
+	[attribute] selector is slightly over .class. Having a specific value does NOT make it more specific
+	#id selectors is the most specific
+
+Type: external < internal < inline
+
+Importance: With the keyword !important after the value of an attribute it becomes first in hyerarchy
+
+SELECTORS
+element
+.class
+#id
+[attribute]
+group selector: with ",". applies to different selectors. 
+	ex	.class1, p {}	//selects .class1 and p
+inside delector: with " ". Applies to selectors inside other selectors.
+	ex	.class1 p {}	//selects all p elements inside any .class1 class
+child selector: with ">". Applies to the direct child, no more than that.
+	ex	.class1 > p {}	// selects all p that are direct child of any .class
+all selectors: with nothing. Applies to elements where both selectors apply.
+		if there is an element selector used it comes first.
+	ex	p.class1 {}	//selects all p elements the have class class1
+Mix and match: you can try to mix these rules
+	ex	p.class1 > h1#thisOne {}
+
+POSTITIONING
+Static: directly on the upper left corner of the parent element. if static , position attributes are ignored.
+Relative: shifted from the upper left corner of the parent element. even out
+Absolute: shifted relative to the nearest ancestor with specified postion (no default
+z-index:how "high" something is. Absolute position skapar en ny layer av z över allt annat
+Fixed: relative to the window
+
+DISPLAY
+inline: side by side. default for many (ex. span but not p). width and height adapted with the content and can not change
+block: under each other. Width 100% by default.
+inline-block: inline, but can adjust height and width.
+none:
+grid: will use the grid for display (see responsive via grid)
+
+FLOAT
+Adjusts to one side allowing other elements to wrap around it.
+Overrides display:block
+Applies to the element wrapped, not the one wrapping. Wrapping elements can skip the wrapping with attribute clear:left/right/both
+
+RESPONSIVE VIA MEDIA QUERY
+Good for responsibity and multiplatforming. Good for big differences in windows size.
+css code inside an "if"
+@media (max-width:600px){CSSCODE}	//Under the breakpoint 600px the Css code applied overriding any other
+Breakpióints: max-width, min-width, 
+can be combined with "and", but if the conditions are exclusive it works as an "or".
+
+RESPONSIVE VIA FLEXBOX
+Good for dinamism and adaptation to small window size changes.Good for design in 1D.
+When display:flex (or inline-flex) the content is displayed in one row (default) or column. IF thw width changes so do the elements, but trying to:
+- Fill all the content in a line
+- If width is defined, will shrink upp to a fixed width
+- If there is flex-basis it is the width and attribute width is ignored.
+- If it has to shrink, it tryes to keep the min- and max-width (for longest word and sentence in a p)
+btw, max-width and flex-basis, the smallest rules, while min-width and flex-basis, the biggest rules.
+flexbox overrides previous position and display rules.
+
+flex:2; in a contained element means it takes proportionally 2 out of the total of space(height or width) inside the flex container
+gap:3px makes a gap between elements
+flex-direction:row(default)/column distributes the items in a row or column
+flex-basis:100px; adjust the width/heght to 100, depending of row/column direction (main-axis).
+order:1; child property. all element with same and lowest order are displayed before other, and normally among them.
+flex-wrap:nowrap;(default) extra element dissapear, do not go to a new row/column. parent property. Change to "wrap" if desired.
+justity-content:flex-start; parent attribute, aligns the item to the "left". flex-end or center or space-between or space-around or space-evently
+align-items:flex-start;aligns in the cross axis. flex-end, center, stretch, baseline
+align-self:center; child property. overrides parents alignment
+align-content:center;parent attribute, only when flex-wrap:wrap. 
+flex-grow:0;flex-shrink:1; child attribute allows growing and shrinking from the flex-basis and to min-max-width (if declared).
+flex:1 1 0; or flex: 1; 1 means standard 110; 110 means true shrink and grow, undefines flex-basis
+FLEXBOXFROGGY!
+
+RESPONSIVE VIA GRID
+Good for complex 2D lay outs. 
+when display:grid the content will be dealed as in a table.
+grid-template-columns: 2fr 1fr; makes two columns, the first one twice as thick as the second one.
+grid-template-rows: 100px 200px; makes 2 rows, with 100 and 200 px height.
+adjusting size with auto or fr fills a row (in -column) or the content (in row)
+adjusting can happen with minmax(10px,20px);
+adjusting with repeat(8, 1fr); gives same width 8times.
+
+gap:5px; makes a 5px gap between columns and rows.
+
+grid-column: span 3; makes an element contained in a grid to take the space of 3 columns.
+grid-column-start: 1; makes an item start in line 1, right befor the first column.
+grid-column-end: 3; makes the item to take place up to line 3 in the grid.
+Same for rows, and grid-area:1/2/1/3 (row start/column start/row end/column end) can be easier
+order works in grid too.
+
+The elements are added to fill one row at a time. If too many elements are added they create a new row with height auto or defined by grid-auto-rows.
+
+container, lines, tracks, cells, items
+GRIDGARDEN!
+
+RESPONSIVE VIA BOOTSTRAP
+Premade CSS files + 12 column layout system.  The premade styles and behaviours, together, are called "components" (like tags in html).
+Its used by linkeng the stylesheet to an external adress, not to a file. CSS in the head, JS before body ends. Links can be found in getbootstrap.com.
+To use it, just give (inline or internal) classes to every element. What class? Check bootstrap documentation.
+12 parts system: Implemeted by usign a div class container, with 1+ div class row, with 1-12 div class col.
+For fixed max-size of elements you can use the variant container-sm/md/lg/xl/xxl/fluid.
+cols can get more relative (absolute if max-width) space by using col-2, col-3, col-10 and so on. Obs! Max 12.
+There is also col-sm and col-sm-3 adn so. IT si possible to combine them as col-sm-12 col-md-8 at the same time, cool for different screens.
+It does not need @media.
+It includes royalty-free icons (SVG). Download them or use the html as source.
+IT includes examples (snippets) as inspiration and plundering source.Just copy it from the source code. 
